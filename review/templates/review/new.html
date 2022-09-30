@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="{% url 'review:create' %}">
-  <input type="text" name="title">
-  <textarea name="content" id="" cols="30" rows="10"></textarea>
-  <input type="submit">
-</form>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-6 my-3">
+      <h1 class="text-center fw-bold">새로 작성하기</h1>
+      <form action="{% url 'review:create' %}" class="d-flex flex-column">
+        <p class="fs-2">제목</p>
+        <input type="text" name="title" class="mb-3" required>
+        <p class="fs-2">내용</p>
+        <textarea name="content" id="" cols="30" rows="10" class="mb-3" required></textarea>
+        <input type="submit" class="btn btn-primary" value="작&nbsp성">
+        <a href="{% url 'review:index' %}" class="btn btn-danger my-3">돌아가기</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}

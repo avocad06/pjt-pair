@@ -1,8 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ review.title }}</h1>
-<p>{{ review.content }}</p>
-<a href="{% url 'review:edit' review.pk %}">리뷰 수정</a>
-<a href="{% url 'review:delete' review.pk %}">리뷰 삭제</a>
+<div class="d-flex justify-content-center">
+    <div class="w-100 d-flex justify-content-center align-items-center" style="height: 500px;">
+        <div class="card shadow p-3 mb-5 bg-body rounded my-3" style="width: 22rem; height: 18rem;">
+            <div class="card-body position-relative">
+                <h5 class="card-title text-center fw-bold">{{ review.title }}</h5>
+                <p class="card-text text-center overflow-auto" style="height: 6rem;">{{ review.content }}</p>
+                <div
+                    class="d-flex justify-content-between w-100 position-absolute bottom-0 start-50 translate-middle-x px-3">
+                    <div class="text-center">
+                        <a href="{% url 'review:edit' review.pk %}" class="btn btn-outline-primary">리뷰 수정</a>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'review:delete' review.pk %}" class="btn btn-danger">리뷰 삭제</a>
+                    </div>
+                </div>
+                {% if review.created_at != review.updated_at %}
+                <p class="text-muted text-end mt-3">{{ review.updated_at | date:'f' }}분에 수정된 글입니다.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
 {% endblock %}
