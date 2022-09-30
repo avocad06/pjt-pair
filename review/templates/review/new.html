@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'review:create' %}">
+  <input type="text" name="title">
+  <textarea name="content" id="" cols="30" rows="10"></textarea>
+  <input type="submit">
+</form>
+{% endblock %}
