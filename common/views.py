@@ -48,7 +48,9 @@ def login(request):
             common = Common.objects.get(name=login_username)
 
             if check_password(login_password, common.password):
+                request.session["name"] = common.name
                 request.session["user"] = common.id
+                print(request.session.keys())
 
                 return redirect("review:index")
 
@@ -62,7 +64,7 @@ def home(request):
     if user_id:
         common_info = Common.objects.get(pk=user_id)
         # 사용자의 이름을 출력한다
-        return HttpResponse(common_info.name)
+        return redirect("review:index")
 
     return HttpResponse("로그인을 해 주세요.")
 
@@ -70,5 +72,8 @@ def home(request):
 def logout(request):
     # 사용자가 로그아웃을 요청한다면,
     # 세션에서 제거한다.
+    request.session.pop("name")
     request.session.pop("user")
+    print(request.session.keys())
+
     return redirect("review:index")

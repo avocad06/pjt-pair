@@ -26,12 +26,24 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
+          {% if not request.session.name %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Board</a>
+            <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+          </li>
+          <li>
+            <a class="nav-link" href="{% url 'common:register' %}">회원가입</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Event</a>
           </li>
+          {% elif request.session.name %}
+          <li>
+            <span class="nav-link">
+              {{ request.session.name }} 님 어서오세요.
+            </span>
+            <a class="nav-link" href="{% url 'common:logout' %}">로그아웃</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
